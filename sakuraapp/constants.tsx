@@ -5,59 +5,84 @@ import React from 'react';
 export const MOCK_LOCATIONS: Location[] = [
   {
     id: '1',
-    name: '舞鶴公園',
-    x: 50,
-    y: 55,
+    name: '舞鶴公園 (福岡市)',
+    lat: 33.5848,
+    lng: 130.3833,
     description: '福岡城跡にある市内有数の桜の名所。お堀の水面に映る桜が見事です。約1,000本の桜が咲き誇ります。',
     currentStatus: 'mankai',
     photos: [
-      { id: 'p1', url: 'https://picsum.photos/id/112/400/300', timestamp: Date.now() - 100000, description: '石垣と桜のコントラストが美しい。' }
+      { 
+        id: 'p1', 
+        url: 'https://picsum.photos/id/112/400/300', 
+        timestamp: Date.now() - 100000, 
+        description: '石垣と桜のコントラストが美しい。',
+        likes: [],
+        userName: 'HanamiMaster'
+      }
     ]
   },
   {
     id: '2',
-    name: '西公園',
-    x: 45,
-    y: 35,
-    description: '「さくら名所100選」にも選ばれている、博多湾を見下ろす丘にある公園。約1,300本の桜があります。',
+    name: '小倉城 (北九州市)',
+    lat: 33.8847,
+    lng: 130.8736,
+    description: '復元された天守閣と桜のコントラストが美しい、北九州を代表する名所。約300本の桜が城を彩ります。',
     currentStatus: 'saki-hajime',
     photos: []
   },
   {
     id: '3',
-    name: '海の中道海浜公園',
-    x: 75,
-    y: 15,
-    description: '広大な敷地に桜とネモフィラのコラボレーションが楽しめます。サイクリングしながらのお花見もおすすめ。',
-    currentStatus: 'tsubomi',
-    photos: []
-  },
-  {
-    id: '4',
-    name: '愛宕神社',
-    x: 25,
-    y: 45,
-    description: '福岡市内を一望できる絶景スポット。夜景と夜桜の組み合わせはデートにも人気です。',
+    name: '太宰府天満宮',
+    lat: 33.5215,
+    lng: 130.5349,
+    description: '学問の神様として有名。境内や周辺の山々が桜色に染まります。梅だけでなく桜も楽しめます。',
     currentStatus: 'chiri-hajime',
     photos: []
   },
   {
-    id: '5',
-    name: '山王公園',
-    x: 65,
-    y: 70,
-    description: '博多駅からも近く、市民の憩いの場として親しまれている公園。子連れのお花見客で賑わいます。',
+    id: '4',
+    name: '秋月城跡 (朝倉市)',
+    lat: 33.4660,
+    lng: 130.6934,
+    description: '「筑前の小京都」と呼ばれる情緒ある城下町。黒門周辺の桜のトンネル（杉の馬場）は絶景です。',
     currentStatus: 'mankai',
+    photos: []
+  },
+  {
+    id: '5',
+    name: '浅井の一本桜',
+    lat: 33.3081,
+    lng: 130.6385,
+    description: '樹齢約100年のヤマザクラ。ため池に逆さに映る「逆さ桜」が幻想的で、写真愛好家に人気です。',
+    currentStatus: 'tsubomi',
+    photos: []
+  },
+  {
+    id: '6',
+    name: '白野江植物公園',
+    lat: 33.9458,
+    lng: 130.9575,
+    description: '早咲きから遅咲きまで約60種もの桜があり、長い期間お花見が楽しめます。',
+    currentStatus: 'mankai',
+    photos: []
+  },
+  {
+    id: '7',
+    name: '流川の桜並木',
+    lat: 33.3421,
+    lng: 130.7699,
+    description: '巨瀬川沿いに約2km続く桜並木。約1000本の桜によるトンネルは圧巻です。',
+    currentStatus: 'saki-hajime',
     photos: []
   }
 ];
 
 export const STATUS_COLORS: Record<keyof typeof BloomStatusLabel, string> = {
-  tsubomi: 'bg-green-500',
-  'saki-hajime': 'bg-pink-300',
-  mankai: 'bg-pink-500',
-  'chiri-hajime': 'bg-pink-200',
-  hazakura: 'bg-green-700',
+  tsubomi: '#22c55e', // green-500
+  'saki-hajime': '#f9a8d4', // pink-300
+  mankai: '#ec4899', // pink-500
+  'chiri-hajime': '#fbcfe8', // pink-200
+  hazakura: '#15803d', // green-700
 };
 
 export const STATUS_ICONS: Record<keyof typeof BloomStatusLabel, React.ReactNode> = {

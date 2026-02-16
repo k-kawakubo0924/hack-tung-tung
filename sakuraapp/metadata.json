@@ -2,6 +2,7 @@
   "name": "サクラアップ (SakuraApp)",
   "description": "桜の名所マップと、ユーザー投稿による開花状況共有アプリ。AIによる桜の判定と俳句生成機能付き。",
   "requestFramePermissions": [
-    "camera"
+    "camera",
+    "geolocation"
   ]
 }

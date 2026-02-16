@@ -37,9 +37,9 @@ export const analyzeSakuraPhoto = async (base64Image: string): Promise<SakuraAna
               以下のフォーマットのJSONのみを返してください。マークダウンのコードブロックは不要です。
               
               {
-                "isSakura": boolean, // 画像に桜が含まれているか
-                "description": string, // 画像の状況を短く説明（日本語）。桜でない場合はその旨を説明。
-                "haiku": string // この画像を見て一句詠んでください（日本語）
+                "isSakura": boolean,
+                "description": "画像の状況を短く説明（日本語）。桜でない場合はその旨を説明。",
+                "haiku": "この画像を見て一句詠んでください（日本語）"
               }
             `,
           },
