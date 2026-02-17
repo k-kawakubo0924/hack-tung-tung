@@ -19,32 +19,26 @@ export const fetchSakuraLocations = async (
   // Query to find nodes/ways/relations related to Sakura/Cherry Blossom
   // Broadened to include various tags and Japanese terms
   // Reduced timeout to 10s to fail faster and reduce server load
-  const query = `
-    [out:json][timeout:10];
-    (
-      // Specific species (Scientific names)
-      node["species"~"Prunus serrulata|Cerasus",i](${south},${west},${north},${east});
-      node["species:ja"~"サクラ|桜",i](${south},${west},${north},${east});
-      
-      // Name or description contains Sakura/Hanami
-      node["name"~"桜|さくら|Sakura|花見",i](${south},${west},${north},${east});
-      way["name"~"桜|さくら|Sakura|花見",i](${south},${west},${north},${east});
-      relation["name"~"桜|さくら|Sakura|花見",i](${south},${west},${north},${east});
+const query = `
+  [out:json][timeout:20];
+  (
+    // 1. 植物学的な種名（サクラ属: Prunus）で指定された「木」
+    node["natural"="tree"]["species"~"Prunus|Cerasus",i](${south},${west},${north},${east});
+    node["natural"="tree"]["genus"="Prunus"](${south},${west},${north},${east});
 
-      // Description often contains info
-      node["description"~"桜|さくら|Sakura",i](${south},${west},${north},${east});
+    // 2. 日本語の種別タグが「サクラ」とされている「木」
+    node["natural"="tree"]["species:ja"~"サクラ|桜",i](${south},${west},${north},${east});
 
-      // Explicit cherry blossom tag
-      node["natural"="tree"]["blossom"="cherry"](${south},${west},${north},${east});
-      node["natural"="tree"]["flower:color"="pink"](${south},${west},${north},${east});
-      
-      // Parks named Sakura
-      node["leisure"="park"]["name"~"桜|さくら",i](${south},${west},${north},${east});
-      way["leisure"="park"]["name"~"桜|さくら",i](${south},${west},${north},${east});
-    );
-    out center 100;
-  `; 
+    // 3. 名前（name）に「桜」を含むが、必ず「木（tree）」または「並木（tree_row）」であるもの
+    node["natural"~"tree|tree_row"]["name"~"桜|さくら",i](${south},${west},${north},${east});
+    way["natural"="tree_row"]["name"~"桜|さくら",i](${south},${west},${north},${east});
 
+    // 4. 明示的に「サクラの花」とタグ付けされているもの
+    node["blossom"="cherry"](${south},${west},${north},${east});
+  );
+  // 重複を避け、中心点として100件まで取得
+  out center 100;
+`;
   try {
     const response = await fetch(OVERPASS_API_URL, {
       method: 'POST',
